@@ -32,15 +32,8 @@ class MainActivity : ComponentActivity() {
 @Composable
 private fun TransitionSquare() {
   var big by remember { mutableStateOf(false) }
-  var bigState = MutableTransitionState(big)
-  bigState.targetState = true
-  val bigTransition = updateTransition(bigState, "big")
-  val size by bigTransition.animateDp({
-    when {
-      false isTransitioningTo true -> spring()
-      else -> tween()
-    }
-  }, label = "size") { if (it) 96.dp else 48.dp }
+  val bigTransition = updateTransition(big, "big")
+  val size by bigTransition.animateDp(label = "size") { if (it) 96.dp else 48.dp }
   val corner by bigTransition.animateDp(label = "corner") { if (it) 0.dp else 18.dp }
   Box(
     Modifier
